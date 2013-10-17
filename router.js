@@ -1,10 +1,8 @@
-function route(handle, pathname) {
-	console.log('About to route a request for ' + pathname);
-	if(typeof handle[pathname] === 'function') {
-		handle[pathname]();
-	} else {
-		handle['404']();
+function route(handle, pathname, response) {
+	if(typeof handle[pathname] !== 'function') {
+		pathname = '404';
 	}
+	return handle[pathname](response);
 }
 
 exports.route = route;
